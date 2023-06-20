@@ -1,0 +1,54 @@
+#logo-cont{
+    height: 8vh;
+    display: flex;
+    margin-left: 50px;
+}
+#logo-intname{
+    color: #E94C24;
+    font-family:'Courier New', Courier, monospace
+}
+.warn-text{
+    color: red;
+}
+.bar{
+    display: flex;
+    align-items: center;
+}
+.bar>a{
+    margin-left: 2px;
+}
+.signincontainer{
+    display: flex;
+    height: 92vh;
+}
+.signin-cont-child{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+#illustr-cont{
+    width: 80%;
+    height: 80%;
+}
+#illustr-cont{
+    background-color: darkgray;
+}
+#contains-inputs{
+    padding: 10px;
+    height: max-content;
+    width: 80%;
+}
+#oth-choices{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+#oth-choices{
+    justify-content: space-evenly;
+}
+.user-choice{
+    border-left: #535353 solid thin;
+    border-right: #535353 solid thin;
+    width: max-content;
+}

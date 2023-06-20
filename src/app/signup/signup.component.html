@@ -20,16 +20,27 @@
                 </div>
                 <button [disabled]="!passwordsame()" 
                 class="button-active" (click)="incsignuplevel()">Continue</button>
-            </div>
-    </div>
+                <span class="bar">
+                    <h4 style="margin: 0;">Have an account?</h4>
+                    <a href="" routerLink="/userauth">login here</a>
+                </span>
+            </div> 
+    </div> 
     <div class="signup-sections" *ngIf="isslidablelarge(1)">
         <div class="signup-child-one">
             <div>
-                <span></span>
+                <span (click)="redsignuplevel()">
+                    <svg width="20" height="18" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.939341 10.9393C0.353554 11.5251 0.353554 12.4749 0.939341 13.0607L10.4853 22.6066C11.0711 
+                        23.1924 12.0208 23.1924 12.6066 22.6066C13.1924 22.0208 13.1924 21.0711 12.6066 20.4853L4.12132 
+                        12L12.6066 3.51472C13.1924 2.92893 13.1924 1.97919 12.6066 1.3934C12.0208 0.807611 11.0711 0.807611 
+                        10.4853 1.3934L0.939341 10.9393ZM26 10.5L2 10.5V13.5L26 13.5V10.5Z" fill="#E94C2A"/>
+                        </svg>
+                </span>
                 <h1>Add Profile</h1>
                 <div>
                     <label for="profile-image-input" id="label-for-profile-image">
-                        <img id="user-image-display" [src]="profile_img_file">
+                        <img id="user-image-display" [src]="profile_img_file | safe">
                         Add a profile image
                     </label>
                     <input type="file" name="profile-image-input" id="profile-image-input" 
@@ -58,7 +69,7 @@
                 <!--Come back to finish this one-->
                 <div *ngIf="states.working_for_org_and_vehicle_type_add">
                     <span>
-                        <h2>What kind of vehicle do you use</h2>
+                        <h4>What kind of vehicle do you use</h4>
                         <select name="vehicle-choice" id="vehicle-choice" class="inputs" formControlName="vehicle_type">
                             <optgroup>
                                 <option value="100">Motorbike(Okada)</option>
@@ -69,15 +80,15 @@
                         </select>
                     </span>
                     <span>
-                        <h2>Do you work for a Logistics organization or are you solo</h2>
+                        <h4>Do you work for a Logistics organization or are you solo</h4>
                         <span>
                             <span>
                                 Organization
-                                <input type="checkbox" name="org-or-solo" id="" [checked]="setorgworker('org')">
+                                <input type="radio" name="org-or-solo" value="org" id="" formControlName="working_for_org">
                             </span>
                             <span>
                                 Solo
-                                <input type="checkbox" name="org-or-solo" id="" [checked]="setorgworker('solo')">
+                                <input type="radio" name="org-or-solo" value="" id="" formControlName="working_for_org">
                             </span>
                         </span>
                         <input type="text" name="org-name" id="org-name" placeholder="organization name" 
@@ -89,7 +100,7 @@
                         your opening and closing hours and so on.
                     </h3>
                     <textarea name="description" id="description" placeholder="Add Shop Description" class="inputs"
-                    formControlName="description"></textarea>
+                    formControlName="description" rows="15"></textarea> 
                 </div>
             </div>
             <button class="button-active" (click)="incsignuplevel()" [disabled]="!basicinfofilled()">
@@ -99,6 +110,14 @@
     <div class="signup-sections" *ngIf="isslidablelarge(2)">
         <div class="signup-child-one">
             <div>
+                <span (click)="redsignuplevel()">
+                    <svg width="20" height="18" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.939341 10.9393C0.353554 11.5251 0.353554 12.4749 0.939341 13.0607L10.4853 22.6066C11.0711 
+                        23.1924 12.0208 23.1924 12.6066 22.6066C13.1924 22.0208 13.1924 21.0711 12.6066 20.4853L4.12132 
+                        12L12.6066 3.51472C13.1924 2.92893 13.1924 1.97919 12.6066 1.3934C12.0208 0.807611 11.0711 0.807611 
+                        10.4853 1.3934L0.939341 10.9393ZM26 10.5L2 10.5V13.5L26 13.5V10.5Z" fill="#E94C2A"/>
+                        </svg>
+                </span>
                 <h1>Add Location</h1>
                 <br>
                 <h3>Adding Location helps us to connect you to other users(buyer, seller) and other users 
@@ -155,6 +174,14 @@
     <div class="signup-sections" *ngIf="isslidablelarge(3)">
         <div class="signup-child-one">
             <div>
+                <span (click)="redsignuplevel()">
+                    <svg width="20" height="18" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.939341 10.9393C0.353554 11.5251 0.353554 12.4749 0.939341 13.0607L10.4853 22.6066C11.0711 
+                        23.1924 12.0208 23.1924 12.6066 22.6066C13.1924 22.0208 13.1924 21.0711 12.6066 20.4853L4.12132 
+                        12L12.6066 3.51472C13.1924 2.92893 13.1924 1.97919 12.6066 1.3934C12.0208 0.807611 11.0711 0.807611 
+                        10.4853 1.3934L0.939341 10.9393ZM26 10.5L2 10.5V13.5L26 13.5V10.5Z" fill="#E94C2A"/>
+                        </svg>
+                </span>
                 <h1>Add Payment Details</h1>
                 <h4>Almost done. All that is left is to enter your payment details and you are all set</h4>
                 <div class="location-img-div"></div>

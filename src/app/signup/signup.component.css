@@ -24,6 +24,13 @@
 .signup-child-two{
     width: 40%;
 }
+.bar{
+    display: flex;
+    align-items: center;
+}
+.bar>a{
+    margin-left: 2px;
+}
 .user-choice{
     border-left: #535353 solid thin;
     border-right: #535353 solid thin;

@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl,FormGroup,Validators } from '@angular/forms';
 import { SignupandloginService } from '../signupandlogin.service';
 import { ProductApiService } from '../product-api.service';
-import { trigger,state,style,transition,animate } from '@angular/animations';
+import { UserstateService } from '../userstate.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +12,10 @@ import { trigger,state,style,transition,animate } from '@angular/animations';
 })
 export class SignupComponent {
 
-  public constructor(private signupservice:SignupandloginService,private productservice:ProductApiService){}
+  public constructor(private signupservice:SignupandloginService,private productservice:ProductApiService
+    ,private userstate:UserstateService,private router:Router){
+      userstate.user_type.next("seller")
+  }
 
   signuplevel = 0;
 
@@ -24,7 +28,7 @@ export class SignupComponent {
     catgshow:false
   }
 
-  file:string|File|Blob = ""
+  file!: File | Blob;
 
   category_list:Array<string> = []
 
@@ -33,13 +37,6 @@ export class SignupComponent {
   users = { buyer:false,seller:true,delivery:false}
 
   profile_img_file = ""
-
-  /* allcategories = [
-  "fashion","food and drink","beauty and cosmetics","electrical","machinery","utensils","medical","automobiles",
-  "gadgets","home appliances","agriculture","academics","office","furniture","plumbing","packaging","groceries",
-  "drycleaning","repair","fitness and health","cinematography and photography","construction and building",
-  "printing and press","IT and consultation","law and consultation","clothing and wear","toys and kids",
-  "music and sound","creativity and art","sports and entertainment","d-i-y","metalwork and welding"] */
 
   allcategories:Array<string> = []
 
@@ -88,6 +85,7 @@ export class SignupComponent {
         this.states.user = "Buyer"
         this.states.userplaceholder = "Username"
         this.states.working_for_org_and_vehicle_type_add = false
+        this.userstate.user_type.next("buyer")
         break
       case "Seller":
         this.signupform.controls.user_type.setValue("seller")
@@ -96,6 +94,7 @@ export class SignupComponent {
         this.states.user = "Seller"
         this.states.userplaceholder = "Shopname"
         this.states.working_for_org_and_vehicle_type_add = false 
+        this.userstate.user_type.next("seller")
         break
       case "Delivery":
         this.signupform.controls.user_type.setValue("delivery")
@@ -104,6 +103,7 @@ export class SignupComponent {
         this.states.user = "Delivery"
         this.states.userplaceholder = "Deliveryname"
         this.states.working_for_org_and_vehicle_type_add = true
+        this.userstate.user_type.next("delivery")
         break
       default:
         break
@@ -111,9 +111,8 @@ export class SignupComponent {
   }
 
   upload_profile_image(event:any){
-    this.file = event.target.files[0]
-    //this.signupform.controls.profile_image.setValue(file)
-    //this.profile_img_file = URL.createObjectURL(this.file)
+    this.file = event.target?.files[0]
+    this.profile_img_file = URL.createObjectURL(this.file)
   }
 
   get buttonstate(){
@@ -133,33 +132,21 @@ export class SignupComponent {
   }
 
   passwordsame(){
+    let usernameset = this.signupform.controls.username.value != ""
     let eqpasswords = this.signupform.controls.password.value == this.signupform.controls.re_entered_password.value
     let nonepmtypasswords = this.signupform.controls.password.value != "" && this.signupform.controls.re_entered_password.value != ""
-    return eqpasswords && nonepmtypasswords
+    return eqpasswords && nonepmtypasswords && usernameset
   }
 
   basicinfofilled(){
-    return this.signupform.controls.email.value != "" || this.signupform.controls.phone_number.value != ""
+    let iscorrectemail = this.signupform.controls.email.value?.includes("@") &&  this.signupform.controls.email.value?.includes(".")
+    return (this.signupform.controls.email.value != "" && iscorrectemail) || this.signupform.controls.phone_number.value != ""
   }
 
   adddatestroke(){
     let paymentdetails = this.signupform.controls.payment_details.controls
     if(paymentdetails.card_expiry_date.value?.length == 2){
       paymentdetails.card_expiry_date.setValue(paymentdetails.card_expiry_date.value+"/")
-    }
-  }
-
-  setorgworker(value:string){
-    switch(value){
-      case "org":
-        this.signupform.controls.working_for_org.setValue("org")
-        break
-      case "solo":
-        this.signupform.controls.working_for_org.setValue("")
-        break
-      default:
-        this.signupform.controls.working_for_org.setValue("")
-        break
     }
   }
 
@@ -205,9 +192,18 @@ export class SignupComponent {
     this.signupform.controls.category.setValue(this.category_list.toString())
     this.signupservice.createnewuser(this.signupform.value,this.file)
     .subscribe((data)=>{
-      console.log(data)
+      if(data.saved){
+        this.userstate.setuser(data.user_type,data.username,data.user_id)
+        if(data.user_type == "seller" || data.user_type == "buyer"){
+          this.router.navigate(["home"])
+        }
+        else{
+          if(data.user_type == "delivery"){
+            this.router.navigate(["orders/delivery"])
+          }
+        }
+      }
     })
-    //console.log(this.signupform.value)
   }
 
 }

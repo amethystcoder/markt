@@ -5,12 +5,19 @@ body{
     margin: 0;
     /* overflow-x: hidden; */
 }
-h1,h2,h3,h4,h5,h6{
-    font-weight: normal;
-    color: rgb(61, 61, 61);
+h1,h2,h3,h4,h5,h6,button,label{
+    font-weight: bolder;
 }
-h1,h2,h3,h4,h5,h6,p,li,ul,div,input,button{
+h1,h2,h3,h4,h5,h6,p,li,ul,div,input,button,textarea{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+textarea{
+    font-size: large;
+}
+a{
+    color: #E94C24;
+    font-weight: bold;
+    text-decoration: none;
 }
 .inputs{
     width: 80%;
@@ -44,15 +51,60 @@ h1,h2,h3,h4,h5,h6,p,li,ul,div,input,button{
     border-radius: 15px;
     padding: 7px 12px 7px 12px;
     width: max-content;
+    height: max-content;
     font-size:large;
     margin: 5px;
 }
 .nav-option,.inv-nav-option{
-    width: 100%;
+    width: 90%;
     border: hidden;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    padding: 7px 0 7px 12px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding: 15px 0 15px 12px;
+}
+.main{
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    width: 100vw;
+}
+.sidebar-container,#sidebar-slater{
+    width: 20%;
+    height: 100%;
+    background-color: white;
+}
+.sidebar-container{
+    position: fixed;
+}
+.product-image{
+    width: 100%;
+    height: 150px;
+    background-color: #bababa;
+}
+button,.product{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product{
+    padding: 10px;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+    margin: 15px;
+    height: max-content;
+    width: 18%;
+}
+.product-details{
+    height: 40%;
+    width: 90%;
+}
+.product-details>h3,.bar>p{
+    font-weight: bolder;
+}
+.products-container{
+    height: 80%;
+    margin-left: 15px;
+    display: flex;
+    flex-wrap: wrap;
 }

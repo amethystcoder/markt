@@ -1,20 +1,37 @@
 <div id="user-link-container">
-    <div id="user-img-profile"></div>
+    <img src="" alt="" id="user-img-profile" routerLink="/account">
 </div>
 <div [ngSwitch]="user">
     <div *ngSwitchCase="'seller'">
-        <div class="nav-option">Home</div>
-        <div class="inv-nav-option">Orders</div>
-        <div class="inv-nav-option">Products</div>
+        
+        <div routerLink="/home" routerLinkActive="nav-option"
+        ariaCurrentWhenActive="page" class="inv-nav-option">Home</div>
+
+        <div routerLink="/orders/seller" routerLinkActive="nav-option"
+        ariaCurrentWhenActive="page" class="inv-nav-option">Orders</div>
+
+        <div routerLink="/products/seller" routerLinkActive="nav-option"
+        ariaCurrentWhenActive="page" class="inv-nav-option">Products</div>
     </div>
     <div *ngSwitchCase="'buyer'">
-        <div class="nav-option">Home</div>
-        <div class="inv-nav-option">Marketplace</div>
-        <div class="inv-nav-option">Basket</div>
-        <div class="inv-nav-option">Favorites</div>
+
+        <div routerLink="/home" routerLinkActive="nav-option"
+        ariaCurrentWhenActive="page" class="inv-nav-option">Home</div>
+
+        <div routerLink="/marketplace" routerLinkActive="nav-option"
+        ariaCurrentWhenActive="page" class="inv-nav-option">Marketplace</div>
+
+        <div class="inv-nav-option" routerLink="/basket" routerLinkActive="nav-option"
+        ariaCurrentWhenActive="page">Basket</div>
+
+        <div class="inv-nav-option" routerLink="/favorites" routerLinkActive="nav-option"
+        ariaCurrentWhenActive="page">Favorites</div>
     </div>
     <div *ngSwitchCase="'delivery'">
-        <div class="nav-option">Delivery Orders</div>
+        <div class="inv-nav-option" routerLink="/orders/delivery" routerLinkActive="nav-option"
+        ariaCurrentWhenActive="page">Delivery Orders</div>
+        <div class="inv-nav-option" routerLink="/pendingorders/delivery" routerLinkActive="nav-option"
+        ariaCurrentWhenActive="page">Pending Deliveries</div>
     </div>
     <div *ngSwitchDefault>output2</div>
 </div>

@@ -35,6 +35,25 @@ export interface User{
     }
 }
 
+export interface LoginDetails{
+  usertype:string,
+  username:string,
+  password:string
+}
+
+export interface LoginResult{
+  user:string,
+  user_id:string,
+  message:string
+}
+
+export interface SignupResult{
+  saved:boolean,
+  user_id:string,
+  username:string,
+  user_type:string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -76,8 +95,19 @@ export class SignupandloginService {
     formdata.append("vehicle_type",user.vehicle_type)
     formdata.append("working_for_org",user.working_for_org)
     console.log(formdata)
-    return this.http.post("http://localhost/markt_php/signup.php",formdata).pipe(
+    return this.http.post<SignupResult>("http://localhost/markt_php/signup.php",formdata).pipe(
       retry(2)
     )
   }
-}
+
+  loginexistinguser(user:LoginDetails){
+    let logindata = new FormData()
+    logindata.append("usernameoremailorphonenumber",user.username)
+    logindata.append("user_type",user.usertype)
+    logindata.append("password",user.password)
+    return this.http.post<LoginResult>("http://localhost/markt_php/login.php",logindata)
+    .pipe(
+      retry(2)
+    )
+  }
+} 

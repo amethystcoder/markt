@@ -1,0 +1,53 @@
+<div id="logo-cont">
+<svg width="106" height="113" viewBox="0 0 106 113" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M9.10156 59.043C11.1835 57.421 16.5268 50.7397 19.4523 51.415C25.5237 52.8165 34.1733 51.5545 
+    35.8177 56.5367C39.3905 67.361 42.0195 53.9434 46.2384 53.213C51.4327 52.3137 57.1671 52.4411 62.464 
+    51.7964C65.5015 51.4266 64.4922 53.7158 64.4922 55.5014C64.4922 57.4145 71.2206 60.4231 72.0454 
+    58.3347C74.6939 51.6289 80.8917 53.1585 88.0612 53.1585C96.2086 53.1585 101 52.5407 101 59.043" 
+    stroke="#E94C2A" stroke-width="9" stroke-linecap="round"/>
+    <path d="M39.435 43.5867C39.435 41.0373 38.8119 25.3651 36.8843 25.9155C35.4665 26.3204 40.7407 28.726 41.522 28.9862" stroke="#E94C2A" stroke-width="9" stroke-linecap="round"/>
+    <path d="M61.3477 42.5438C61.3477 37.2525 60.7069 33.0021 59.2607 27.9434" stroke="#E94C2A" stroke-width="9" stroke-linecap="round"/>
+    <path d="M96.8265 48.8008C94.2972 41.9866 91.4681 30.1943 84.3627 27.8272C82.8704 27.33 82.2178 25.1357 82.2178 23.7715" stroke="#E94C2A" stroke-width="9" stroke-linecap="round"/>
+    <path d="M22.7393 13.3434C38.7393 13.3434 54.7393 13.3434 70.7394 13.3434C74.0131 13.3434 77.5089 12.2743 79.0872 15.4292" stroke="#E94C2A" stroke-width="9" stroke-linecap="round"/>
+    <path d="M13.3477 69.6592C14.8844 81.5625 19.6085 117.119 19.6085 105.117" stroke="#E94C2A" stroke-width="9" stroke-linecap="round"/>
+    <path d="M20.6523 89.4736C29.6138 89.4736 37.9646 88.4307 46.7394 88.4307" stroke="#E94C2A" stroke-width="9" stroke-linecap="round"/>
+    <path d="M46.7393 88.4307V105.117" stroke="#E94C2A" stroke-width="9" stroke-linecap="round"/>
+    <path d="M98.9128 62.3584C96.9778 73.9613 96.561 82.7766 99.2606 94.1085C100.489 99.2661 101 102.73 101 108.245" stroke="#E94C2A" stroke-width="9" stroke-linecap="round"/>
+    <path d="M5 51.9301C5 45.435 11.0269 42.0274 13.3478 36.8082C15.6742 31.5768 17.5218 25.0529 17.5218 19.6006" stroke="#E94C2A" stroke-width="9" stroke-linecap="round"/>
+    <path d="M19.6084 6.04289C37.7209 6.04289 55.7971 5 73.8694 5" stroke="#E94C2A" stroke-width="9" stroke-linecap="round"/>
+    </svg>
+    <h1 id="logo-intname">Markt</h1>
+</div>
+<div class="signincontainer">
+    <div class="signin-cont-child">
+        <div id="illustr-cont"></div>
+    </div>
+    <div class="signin-cont-child">
+        <div id="contains-inputs">
+            <h1>Sign in as {{usertype}}</h1>
+            <h4 class="warn-text">{{warnerr}}</h4>
+            <label for="usershopdeliveryname">{{namestate}}, email or phone number</label>
+            <br>
+            <input type="text" name="usershopdeliveryname" id="usershopdeliveryname" class="inputs" 
+            [(ngModel)]="userlogindata.username">
+            <br>
+            <label for="password">password</label>
+            <br>
+            <input type="password" name="password" id="password" class="inputs" 
+            [(ngModel)]="userlogindata.password">
+            <br>
+            <a href="" routerLink="">Forgot Password?</a>
+            <h2>Sign up as</h2>
+            <div id="oth-choices"> 
+                <div class="user-choice" (click)="setuser('Buyer')">Buyer</div>
+                <div class="user-choice" (click)="setuser('Seller')">Seller</div>
+                <div class="user-choice" (click)="setuser('Delivery')">Delivery</div>
+            </div>
+            <button class="button-active" [disabled]="emptyfields()" (click)="loginuser()">Sign in</button>
+            <span class="bar">
+                <h4 style="margin: 0;">New user?</h4>
+                <a href="" routerLink="/new">sign up here</a>
+            </span>
+        </div>
+    </div>
+</div>
